@@ -1,0 +1,11 @@
+tip 1. ^find^replace
+	e.g.
+	echo "hello" <press enter>
+	^hello^world <press enter>
+	等价命令:
+	!:s/hello/world # 只替换第一个
+	!:gs/hello/world # 替换全部
+
+tip 2. fc
+	根据$EDITOR变量的设置打开一个编辑器来编辑上一条命令，退出编辑器之后会
+	立即执行编辑过的命令。
