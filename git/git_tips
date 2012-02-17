@@ -1,0 +1,7 @@
+1. Remove untracked files from working tree:
+	git clean -fdn
+then,
+	git clean -fd
+	-f: force, -d: directory, -n: dry-run(模拟运行, 并不真正执行)
+	清理掉working tree中不被git跟踪的那些文件或目录，递归执行。
+
