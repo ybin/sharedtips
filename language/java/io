@@ -1,0 +1,40 @@
+现在将Java IO部分稍作整理
+
+Java IO的核心设计模式为：修饰模式(Decorator pattern)
+
+Java IO分类标准：
+1. 字节流(byte stream) v.s. 字符流(char stream)
+2. 序列化(serialization) v.s. 随机存储(random access)
+另外有两个特殊的interface: DataInput, DataOutput.
+DataInput定义了如下主要方法：
+	read{Boolean, Byte, Char, Double, Float, Int, Long, Short,
+		UnsignedShort, UTF}(), 以及重要的readLine()方法。
+DataOutput定义了如下主要方法：
+	write{Boolean, Byte, Char, Double, Float, Int, Long, Short,
+		UnsignedShort, UTF}(), 以及write(byte[])方法。
+这两个接口的实现类都隶属于序列化类一方，读写都是按照顺序进行的。从其
+众多的方法中可见，"Data"指的是Java的primitive data type.
+
+所有分类均对应有input与output，下面都是以input为例，省略output.
+
+1. 字节流(byte stream)
+抽象基类是InputStream，其重要的实现子类有FileInputStream、ByteArrayInputStream，另外还有一个修饰类(decorator)FilterInputStream，用来实现修饰模式。
+FilterInputStream有两个重要子类：BufferedInputStream, DataInputStream.
+InputStream只是一个byte一个byte的处理流，而FilterInputStream在它的基础上
+增添了其职责：BufferedInputStream为InputStream增加了buffer，加快处理效率；
+DataInputStream为InputStream提供了DataInput接口，方便了对基础数据类型的
+读取。
+当然也可以为一个InputStream套用多个修饰：
+InputStream is = new DataInputStream(
+					new BufferedInputStream(
+						new FileInputStream(filepath)));
+
+2. 字符流(char stream)
+抽象基类为Reader，其重要的实现子类是BufferedReader、StringReader，其中
+BufferedReader有一个很常用的函数：readLine()，事实上，DataInputStream类中的
+readLine()函数推荐用BufferedReader中的readLine()函数替代，后者效率更高。
+第三个重要的子类是InputStreamReader，该类实现从字节流到字符流的转变，它会
+从字节流中读取数据，然后根据charset将这些数据进行转换，可以说，它是
+字节流与字符流之间的桥梁。
+	在字符流中，修饰模式体现的并不明显。
+
