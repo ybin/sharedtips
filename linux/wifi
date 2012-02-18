@@ -1,0 +1,20 @@
+由于路由器的dhcp功能实在很差劲(水星的无线路由器)，于是产生了下面的解决方案：
+在路由器中设置静态IP地址，停用dhcp服务器，然后两台电脑：XP, Ubuntu组成
+局域网。
+XP系统的配置不必多说了，很简单。(通过网线连接到路由器)。
+Ubuntu lucid(10.04)如下：
+1. 设置ip地址、网关、子网掩码，在/etc/network/interface中设置
+	auto wlan0
+	iface wlan0 inet static
+	address 192.168.1.199
+	netmask 255.255.255.0
+	gateway 192.168.1.1
+2. 设置DNS，在/etc/resolv.conf中设置
+	nameserver 192.168.1.1
+P.S. 不进行这一步，开始也可以上网，但是突然就断掉了，可以连接到路由器，但是
+连接不到网络。
+3. 发起wifi连接
+	# search wifi access point, 这一步只进行一次就好了，以后就可以省掉了。
+	wpa_passphrase your_ssid your_passwd > ~/wlan0.conf
+	# set up wifi connect
+	sudo wpa_supplicant -B -i wlan0 -Dwext -c ~/wlan0.conf
