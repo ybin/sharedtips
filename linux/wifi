@@ -18,3 +18,6 @@ P.S. 不进行这一步，开始也可以上网，但是突然就断掉了，可
 	wpa_passphrase your_ssid your_passwd > ~/wlan0.conf
 	# set up wifi connect
 	sudo wpa_supplicant -B -i wlan0 -Dwext -c ~/wlan0.conf
+4. 重启网络，使设置生效
+	sudo /etc/init.d/networking restart
+
