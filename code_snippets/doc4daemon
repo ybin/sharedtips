@@ -39,3 +39,5 @@ The child does not inherit record locks from its parent.
 The child does not inherit timers from its parent.
 The child does not inherit outstanding asynchronous I/O operations from its parent, nor does it inherit  any  asynchronous I/O contexts from its parent.
 For more insight information, please read the man page of this system call.
+
+see http://www.thegeekstuff.com/2012/02/c-daemon-process/ for details.
