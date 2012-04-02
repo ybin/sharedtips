@@ -1,0 +1,13 @@
+
+LKM := Loadable Kernel Module
+
+How to create LKMs:
+1. write source file: lkm.c
+2. write Makefile: Makefile
+3. kernel module utilities:
+	modinfo: show module information
+	modprobe: load modules which the current module dependents
+	insmod: only load the current module
+4. see module output information using `dmesg | tail`
+
+link: www.thegeekstuff.com/2012/04/linux-lkm-basics/
